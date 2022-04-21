@@ -11,12 +11,14 @@ import com.javaeunjeong.MVCboard.command.BContentCommand;
 import com.javaeunjeong.MVCboard.command.BDeleteCommand;
 import com.javaeunjeong.MVCboard.command.BListCommand;
 import com.javaeunjeong.MVCboard.command.BModifyCommand;
+import com.javaeunjeong.MVCboard.command.BReplyCommand;
+import com.javaeunjeong.MVCboard.command.BReplyViewCommand;
 import com.javaeunjeong.MVCboard.command.BWriteCommand;
 
 @Controller
 public class BController {
 	
-	BCommand command = null;
+BCommand command = null;
 	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
@@ -26,13 +28,13 @@ public class BController {
 		
 		return "list";
 	}
-
+	
 	@RequestMapping(value = "/write_view")
-	public String write_view() {
+	public String write_view(Model model) {
 		
 		return "write_view";
 	}
-
+	
 	@RequestMapping(value = "/content_view")
 	public String content_view(HttpServletRequest request, Model model) {
 		
@@ -43,9 +45,14 @@ public class BController {
 		
 		return "content_view";
 	}
-
+	
 	@RequestMapping(value = "/reply_view")
-	public String reply_view() {
+	public String reply_view(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		command = new BReplyViewCommand();
+		command.excute(model);	
 		
 		return "reply_view";
 	}
@@ -53,10 +60,10 @@ public class BController {
 	@RequestMapping(value = "/write")
 	public String write(HttpServletRequest request, Model model) {
 		
-		model.addAttribute("request",request);
+		model.addAttribute("request", request);
 		
 		command = new BWriteCommand();
-		command.excute(model);
+		command.excute(model);		
 		
 		return "redirect:list";
 	}
@@ -64,7 +71,7 @@ public class BController {
 	@RequestMapping(value = "/modify")
 	public String modify(HttpServletRequest request, Model model) {
 		
-		model.addAttribute("request",request);
+		model.addAttribute("request", request);
 		
 		command = new BModifyCommand();
 		command.excute(model);
@@ -75,7 +82,7 @@ public class BController {
 	@RequestMapping(value = "/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		
-		model.addAttribute("request",request);
+		model.addAttribute("request", request);
 		
 		command = new BDeleteCommand();
 		command.excute(model);
@@ -84,10 +91,13 @@ public class BController {
 	}
 	
 	@RequestMapping(value = "/reply")
-	public String reply() {
+	public String reply(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		command = new BReplyCommand();
+		command.excute(model);	
 		
 		return "redirect:list";
 	}
 }
-
-	

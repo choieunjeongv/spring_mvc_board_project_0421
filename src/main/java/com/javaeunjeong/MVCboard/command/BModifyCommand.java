@@ -14,18 +14,19 @@ public class BModifyCommand implements BCommand {
 	public void excute(Model model) {
 		// TODO Auto-generated method stub
 		
-		Map<String, Object> map =  model.asMap();
+		Map<String, Object> map = model.asMap();
 		
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String bId = request.getParameter("bid");
 		String bName = request.getParameter("bname");
 		String bTitle = request.getParameter("btitle");
-		String bContent = request.getParameter("bcontent");		
+		String bContent = request.getParameter("bcontent");
 		
 		BDao dao = new BDao();
 		
 		dao.modify(bId, bName, bTitle, bContent);
+
 	}
 
 }

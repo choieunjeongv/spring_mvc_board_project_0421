@@ -13,16 +13,18 @@ public class BDeleteCommand implements BCommand {
 	@Override
 	public void excute(Model model) {
 		// TODO Auto-generated method stub
-		Map<String, Object> map =  model.asMap();
 		
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-	
-		String bId = request.getParameter("bId");
-				
+		Map<String, Object> map = model.asMap();
+		
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		String bId = request.getParameter("bId");		
 		
 		BDao dao = new BDao();
 		
 		dao.delete(bId);
+
+		
 	}
 
 }
